@@ -1,0 +1,14 @@
+*.pyc
+.DS_Store
+*.swp
+.idea
+.cache
+*.log
+.env
+*.log.*
+data/*
+
+.project
+.pydevproject
+
+/.vscode
