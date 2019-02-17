@@ -7,6 +7,9 @@
 .env
 *.log.*
 data/*
+*.sample
+
+.targets.json
 
 .project
 .pydevproject

@@ -63,7 +63,7 @@ def crawler(*, queue: Queue):
     sites = []
     for target in crawler_config.crawling_targets:
         clazz = str_to_class(target['type'])
-        sites.append(clazz(threshold=target['threshold'], page_max=target['page_max'], code=target['code']))
+        sites.append(clazz(page_max=target['page_max'], code=target['code']))
 
     thread_num = len(sites)
     for site in sites:

@@ -16,5 +16,11 @@
 추후에 여타 사이트의 주식 사이트를 크롤링 할 예정.
 
 
+    구동에는 .env 파일과 targets.json 파일이 필요합니다.
+
+    **.env 파일의 용도는 구동 옵션**이며, targets.json 파일의 용도는 대상 종목과 크롤러 타입 설정 목록을 JSON으로 기록해둔 파일입니다.
+
+    둘다 .sample 파일을 참고해서, 만들어 넣고 구동하셔야 합니다.
+
 ## License
 MIT (http://www.opensource.org/licenses/mit-license.php)

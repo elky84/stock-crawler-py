@@ -12,9 +12,8 @@ logger = logging.getLogger("crawler")
 
 class NaverStock(Crawler):
 
-    def __init__(self, *, code=251270, threshold=15, page_max=20):
+    def __init__(self, *, code=251270, page_max=20):
         Crawler.__init__(self)
-        self.threshold = threshold
         self.pageMax = page_max
         self.code = code
 
