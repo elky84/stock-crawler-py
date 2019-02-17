@@ -4,35 +4,19 @@ from urllib.error import URLError
 from urllib.request import Request, urlopen
 from datetime import date, timedelta, datetime, timezone
 from bs4 import BeautifulSoup
+from .crawler import Crawler
+
+from exception import SkipCrawler
 
 logger = logging.getLogger("crawler")
 
-class SkipCrawler(ValueError):
-    pass
-
-class NaverStock():
+class NaverStock(Crawler):
 
     def __init__(self, *, code=251270, threshold=15, page_max=20):
+        Crawler.__init__(self)
         self.threshold = threshold
         self.pageMax = page_max
         self.code = code
-
-
-    def crawling(self, url, encoding='cp949'):
-        log = logger.getChild('BaseSite.crawling')
-        request = Request(url, headers={
-            'User-Agent':
-                'Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.1) '
-                'Gecko/2008071615 Fedora/3.0.1-1.fc9 Firefox/3.0.1'})
-        try:
-            handle = urlopen(request)
-        except URLError:
-            log.error('may be, url host changed: {}'.format(url))
-            return None
-        data = handle.read()
-        soup = BeautifulSoup(data.decode(encoding, 'ignore'), "html.parser", from_encoding="utf-8")
-
-        return soup
 
     def crawler(self):
         log = logger.getChild('NaverStock.crawler')
@@ -62,5 +46,8 @@ class NaverStock():
                     'high': td[4].text,
                     'low': td[5].text,
                     'trade_count': td[6].text,
+                    'type': self.type,
+                    'code': self.code
                     }
                 log.info(obj)
+                self.insert_or_update(obj)

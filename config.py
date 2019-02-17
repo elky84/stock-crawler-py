@@ -1,9 +1,13 @@
+""":mod:`crawler.config` ---  Configure for Crawler
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+"""
 import os
 import pathlib
 from collections import ChainMap
 
 from typing import Mapping
-
+import json
 
 class Configure:
 
@@ -85,7 +89,30 @@ class Configure:
             }
         }
         return logging
-   
-config = Configure.from_path(
+
+    @property
+    def db_config(self):
+        return {
+            'url': self.raw['DATABASE_URL'],
+        }
+
+    @property
+    def debug(self):
+        return self.raw['TYPE'] == 'dev'
+
+    @property
+    def crawling_targets(self):
+        json_data=open('targets.json').read()
+        return json.loads(json_data)
+
+    @property
+    def crawler_interval(self):
+        return {
+            'sec': self.raw.get('CRAWLER_INTERVAL_SEC', 30),
+            'minutes_min': self.raw.get('CRAWLER_INTERVAL_MINUTES_MIN', 1),
+            'minutes_max': self.raw.get('CRAWLER_INTERVAL_MINUTES_MAX', 5)
+        }
+
+crawler_config = Configure.from_path(
     pathlib.Path(os.path.dirname(__file__)) / '.env'
 )

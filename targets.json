@@ -1,0 +1,11 @@
+[{
+	"type": "NaverStock",
+    "code": 251270,
+    "threshold":500,
+    "page_max":10
+}, {
+	"type": "NaverStock",
+    "code": 181710,
+    "threshold":500,
+    "page_max":10
+}]
