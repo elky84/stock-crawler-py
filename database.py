@@ -13,9 +13,7 @@ logger = logging.getLogger(__name__)
 class MongoDB:
 
     def __init__(self, db: str):
-        db_config = crawler_config.db_config
-        client = MongoClient(host=db_config['url'],
-                             serverSelectionTimeoutMS=3)
+        client = MongoClient('mongodb://%s:%s@%s' % (crawler_config.db_auth_user, crawler_config.db_auth_pass, crawler_config.db_config), serverSelectionTimeoutMS=3)
         self.collection = client[db]
 
     def query(self, collection: str):

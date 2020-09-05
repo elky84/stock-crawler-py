@@ -92,9 +92,19 @@ class Configure:
 
     @property
     def db_config(self):
-        return {
-            'url': self.raw['DATABASE_URL'],
-        }
+        return self.raw['DATABASE_URL']
+
+    @property
+    def db_auth_user(self):
+        return self.raw['DATABASE_AUTH_USER']
+
+    @property
+    def db_auth_pass(self):
+        return self.raw['DATABASE_AUTH_PASS']
+
+    @property
+    def db_name(self):
+        return self.raw['DATABASE_NAME']
 
     @property
     def debug(self):
